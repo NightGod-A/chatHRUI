@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="./output.css" rel="stylesheet">
+		<script src="jquery-3.6.1.min.js"></script>
+		<title>Chat Page</title>
+
+	</head>
+
+	<style>
+		/* 自定义样式 */
+		html,
+		body {
+			height: 100%;
+		}
+
+		.chat-container {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+		}
+
+		.chat-messages {
+			flex: 1;
+			overflow-y: auto;
+		}
+
+		.user-message {
+			justify-end;
+			align-self: flex-start;
+		}
+
+		.assistant-message {
+			align-self: flex-end;
+		}
+	</style>
+	</head>
+
+	<body onload="sendMessage()">
+		<div class="chat-container">
+			<div class="flex-1 bg-gray-100 p-4 chat-messages" id="chat">
+				<!-- 聊天消息区域 -->
+
+				<!-- 更多消息... -->
+			</div>
+
+			<!-- 用户输入区域 -->
+			<div class="p-8">
+				<!-- 容器用于放置按钮 -->
+				<div class="flex justify-between mb-4 hidden" id="userOption">
+					<button class="bg-green-500 text-white rounded-lg px-4 py-2 hidden" id="option1"
+						onclick="chooseOption('1')"></button>
+					<button class="bg-green-500 text-white rounded-lg px-4 py-2 hidden" id="option2"
+						onclick="chooseOption('2')"></button>
+					<button class="bg-green-500 text-white rounded-lg px-4 py-2 hidden" id="option3"
+						onclick="chooseOption('3')"></button>
+					<button class="bg-green-500 text-white rounded-lg px-4 py-2 hidden" id="option4"
+						onclick="chooseOption('4')"></button>
+				</div>
+				<!-- 容器用于放置按钮 -->
+				<div class="flex justify-between mb-4 hidden" id="userConfirm">
+					<button class="bg-green-500 text-white rounded-lg px-4 py-2"
+						onclick="changeConfirmationToTrue()">YES</button>
+					<button class="bg-red-500 text-white rounded-lg px-4 py-2"
+						onclick="changeConfirmationToFalse()">NO</button>
+				</div>
+
+				<div class="flex">
+					<input type="text" id="userText"
+						class="flex-1 rounded-l-lg border border-gray-300 p-2 focus:outline-none"
+						placeholder="Type your message">
+					<button class="bg-blue-500 text-white rounded-r-lg px-4 py-2" onclick="sendMessage()"
+						id="sendBtn">Send</button>
+				</div>
+
+
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			const questionQueue = [];
+			const optionQueue = [];
+			var number = localStorage.getItem("number");
+			for (let i = 1; i <= number; i++) {
+				questionQueue.push(localStorage.getItem("question"+i));
+			}
+			for(let i = 1; i <= number; i++){
+				let optionNum = localStorage.getItem("q" + i);
+				optionQueue.push(optionNum);
+				if(optionNum > 0){
+					for(let j = 1; j <= optionNum; j++){
+						optionQueue.push(localStorage.getItem("q" + i + "o" + j));
+					}
+				}
+			}
+			var question = "";
+			var userMessage = "";
+			const messageStack = [];
+			var flag = 0;
+			var userTemp;
+			var confirmation = 1;
+			var input = document.getElementById("userText");
+			var btn = document.getElementById("sendBtn");
+			var questionOptionNum;
+			const contentConfirm = document.getElementById('userConfirm');
+			const contentOption = document.getElementById('userOption');
+			const contentOption1 = document.getElementById('option1');
+			const contentOption2 = document.getElementById('option2');
+			const contentOption3 = document.getElementById('option3');
+			const contentOption4 = document.getElementById('option4');
+
+			async function changeConfirmationToTrue() {
+				coonfirmation = 1;
+				addUserText("YES");
+				contentConfirm.classList.add('hidden');
+				messageStack.push(userMessage);
+				userMessage = "";
+				question = "";
+				await sendMessage();
+			}
+
+			async function changeConfirmationToFalse() {
+				coonfirmation = 0;
+				addUserText("NO");
+				contentConfirm.classList.add('hidden');
+				userMessage = "";
+				chatResponse(question);
+				if(questionOptionNum > 0){
+					btn.disabled = true;
+					input.disabled = true;
+					contentOption.classList.remove('hidden');
+					for(let i = 1; i <= questionOptionNum; i++){
+						if(i == 1){
+							contentOption1.classList.remove('hidden');
+						} else if(i ==2){
+							contentOption2.classList.remove('hidden');
+						} else if(i ==3){
+							contentOption3.classList.remove('hidden');
+						} else if(i ==4){
+							contentOption4.classList.remove('hidden');
+						}
+					}
+				}
+			}
+			
+			async function chooseOption(x){
+				let value = document.getElementById("option"+x).value;
+				input.value = value;
+				contentOption.classList.add('hidden');
+				contentOption1.classList.add('hidden');
+				contentOption2.classList.add('hidden');
+				contentOption3.classList.add('hidden');
+				contentOption4.classList.add('hidden');
+				btn.disabled = false;
+				input.disabled = false;
+				sendMessage();
+			}
+
+			function chatResponse(message) {
+				var responseChat = '<div class="user-message mb-4">' +
+					'<div class="flex items-start space-x-4">' +
+					'<div class="bg-white rounded-lg p-2">' +
+					'<p class="text-sm text-gray-700">' + message + '</p>' +
+					'</div> </div> </div>';
+				$("#chat").append(responseChat);
+			}
+
+			function addUserText(userText) {
+				var userChat = '<div class="user-message mb-4">' +
+					'<div class="flex items-start space-x-4">' +
+					'<div class="bg-blue-500 rounded-lg p-2">' +
+					'<p class="text-sm text-white">' + userText + '</p>' +
+					'</div> </div> </div>';
+				$("#chat").append(userChat);
+			}
+			const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+			
+			
+			async function sendMessage() {
+				if (question != "" && question != null) {
+					if (input.value == "" || input.value == null) {
+						return;
+					}
+					userMessage = input.value;
+					addUserText(userMessage);
+					input.value = "";
+				}
+
+				if (question == "" || question == null) {
+					question = questionQueue.shift();
+					chatResponse(question);
+					questionOptionNum = optionQueue.shift();
+					if(questionOptionNum > 0){
+						btn.disabled = true;
+						input.disabled = true;
+						contentOption.classList.remove('hidden');
+						for(let i = 1; i <= questionOptionNum; i++){
+							let value = optionQueue.shift();
+							if(i == 1){
+								contentOption1.classList.remove('hidden');
+								contentOption1.value = value;
+								contentOption1.textContent = value;
+							} else if(i ==2){
+								contentOption2.classList.remove('hidden');
+								contentOption2.value = value;
+								contentOption2.textContent = value;
+							} else if(i ==3){
+								contentOption3.classList.remove('hidden');
+								contentOption3.value = value;
+								contentOption3.textContent = value;
+							} else if(i ==4){
+								contentOption4.classList.remove('hidden');
+								contentOption4.value = value;
+								contentOption4.textContent = value;
+							}
+						}
+					}
+					return;
+				}
+
+				input.placeholder = 'Waiting the response';
+				btn.disabled = true;
+				input.disabled = true;
+
+				const url = 'https://chathr.854799920.workers.dev/';
+				let jsonData;
+				alert("please wait , the free type can not send more than 3 messages in 1 minute");
+				// 等待 20 秒
+				await sleep(20000);
+				if (flag == 0) {
+
+					if (userMessage == "" || userMessage == null) {
+
+						jsonData = {
+							"question": question,
+							"message": "",
+							"flag": flag
+						}
+
+						await fetchAPI(0, jsonData, url);
+					} else {
+						jsonData = {
+							"question": "",
+							"message": {
+								"assistant": question,
+								"user": userMessage
+							},
+							"flag": flag
+						}
+						await fetchAPI(1, jsonData, url);
+					}
+				}
+			}
+
+			async function fetchAPI(type, jsonData, url) {
+				fetch(url, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(jsonData)
+					})
+					.then(response => response.json())
+					.then(data => {
+						console.log(data);
+						if (type == 0) {
+							chatResponse(data.message);
+						}
+						if (type == 1) {
+							try {
+								let jsonResponse = JSON.parse(data.message);
+								if (jsonResponse.isRelevant) {
+									chatResponse(jsonResponse.response);
+									contentConfirm.classList.remove('hidden');
+
+								} else {
+									chatResponse(jsonResponse.response);
+								}
+							} catch (error) {
+								chatResponse(data.message);
+							}
+						}
+						input.disabled = false;
+						input.placeholder = 'Type your message';
+						btn.disabled = false;
+					})
+					.catch(error => {
+						chatResponse("error");
+						input.disabled = false;
+						input.placeholder = 'Type your message';
+						btn.disabled = false;
+						console.error('发生错误:', error);
+					});
+			}
+		</script>
+
+	</body>
+</html>

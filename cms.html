@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title></title>
+		<link href="./output.css" rel="stylesheet">
+		<script src="jquery-3.6.1.min.js"></script>
+	</head>
+	<body class="p-8">
+		<div class="flex flex-col items-center">
+			<form class="w-3/4" action="hrForCMS.html">
+				<!-- 十个输入框 -->
+				<div class="grid grid-cols-1 gap-4">
+					<input type="text" id="question1"
+						class="w-full rounded-lg border border-gray-300 p-2 focus:outline-none "
+						placeholder="question 1">
+					<!-- 用 flex 布局在一行中排列四个短的 input -->
+					<div class="flex">
+						<input type="text" id="q1o1" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option 1">
+						<input type="text" id="q1o2" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option2">
+						<input type="text" id="q1o3" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option3">
+						<input type="text" id="q1o4" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mb-4"
+							placeholder="option4">
+					</div>
+					<input type="text" id="question2"
+						class="w-full rounded-lg border border-gray-300 p-2 focus:outline-none "
+						placeholder="question 2">
+					<!-- 用 flex 布局在一行中排列四个短的 input -->
+					<div class="flex">
+						<input type="text" id="q2o1" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option1">
+						<input type="text" id="q2o2" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option2">
+						<input type="text" id="q2o3" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option3">
+						<input type="text" id="q2o4" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mb-4"
+							placeholder="option4">
+					</div>
+					<input type="text" id="question3"
+						class="w-full rounded-lg border border-gray-300 p-2 focus:outline-none "
+						placeholder="question 3">
+					<!-- 用 flex 布局在一行中排列四个短的 input -->
+					<div class="flex">
+						<input type="text" id="q3o1" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option1">
+						<input type="text" id="q3o2" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option2">
+						<input type="text" id="q3o3" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option3">
+						<input type="text" id="q3o4" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mb-4"
+							placeholder="option4">
+					</div>
+					<input type="text" id="question4"
+						class="w-full rounded-lg border border-gray-300 p-2 focus:outline-none "
+						placeholder="question 4">
+					<!-- 用 flex 布局在一行中排列四个短的 input -->
+					<div class="flex">
+						<input type="text" id="q4o1" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option1">
+						<input type="text" id="q4o2" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option2">
+						<input type="text" id="q4o3" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option3">
+						<input type="text" id="q4o4" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mb-4"
+							placeholder="option4">
+					</div>
+					<input type="text" id="question5"
+						class="w-full rounded-lg border border-gray-300 p-2 focus:outline-none "
+						placeholder="question 5">
+					<!-- 用 flex 布局在一行中排列四个短的 input -->
+					<div class="flex">
+						<input type="text" id="q5o1" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option1">
+						<input type="text" id="q5o2" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option2">
+						<input type="text" id="q5o3" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option3">
+						<input type="text" id="q5o4" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mb-4"
+							placeholder="option4">
+					</div>
+					<input type="text" id="question6"
+						class="w-full rounded-lg border border-gray-300 p-2 focus:outline-none "
+						placeholder="question 6">
+					<!-- 用 flex 布局在一行中排列四个短的 input -->
+					<div class="flex">
+						<input type="text" id="q6o1" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option1">
+						<input type="text" id="q6o2" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option2">
+						<input type="text" id="q6o3" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option3">
+						<input type="text" id="q6o4" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mb-4"
+							placeholder="option4">
+					</div>
+					<input type="text" id="question7"
+						class="w-full rounded-lg border border-gray-300 p-2 focus:outline-none "
+						placeholder="question 7">
+					<!-- 用 flex 布局在一行中排列四个短的 input -->
+					<div class="flex">
+						<input type="text" id="q7o1" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option1">
+						<input type="text" id="q7o2" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option2">
+						<input type="text" id="q7o3" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option3">
+						<input type="text" id="q7o4" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none" mb-4
+							placeholder="option4">
+					</div>
+					<input type="text" id="question8"
+						class="w-full rounded-lg border border-gray-300 p-2 focus:outline-none "
+						placeholder="question 8">
+					<!-- 用 flex 布局在一行中排列四个短的 input -->
+					<div class="flex">
+						<input type="text" id="q8o1" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option1">
+						<input type="text" id="q8o2" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option2">
+						<input type="text" id="q8o3" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option3">
+						<input type="text" id="q8o4" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mb-4"
+							placeholder="option4">
+					</div>
+					<input type="text" id="question9"
+						class="w-full rounded-lg border border-gray-300 p-2 focus:outline-none "
+						placeholder="question 9">
+					<!-- 用 flex 布局在一行中排列四个短的 input -->
+					<div class="flex">
+						<input type="text" id="q9o1" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option1">
+						<input type="text" id="q9o2" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option2">
+						<input type="text" id="q9o3" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option3">
+						<input type="text" id="q9o4" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mb-4"
+							placeholder="option4">
+					</div>
+					<input type="text" id="question10"
+						class="w-full rounded-lg border border-gray-300 p-2 focus:outline-none "
+						placeholder="question 10">
+					<!-- 用 flex 布局在一行中排列四个短的 input -->
+					<div class="flex">
+						<input type="text" id="q10o1" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option1">
+						<input type="text" id="q10o2" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option2">
+						<input type="text" id="q10o3" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mr-2 mb-4"
+							placeholder="option3">
+						<input type="text" id="q10o4" class="w-1/4 rounded-lg border border-gray-300 p-2 focus:outline-none mb-4"
+							placeholder="option4">
+					</div>
+				</div>
+
+				<!-- 按钮 -->
+				<button class="mt-4 bg-blue-500 text-white rounded-lg px-4 py-2"
+					onclick="loadQuestion()">submit</button>
+			</form>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var number = 0;
+
+		function loadQuestion() {
+			for (let i = 1; i <= 10; i++) {
+				if (document.getElementById("question" + i).value != "" && document.getElementById("question" + i).value !=
+					null) {
+					number++;
+					localStorage.setItem("question" + number, document.getElementById("question" + i).value);
+					for(let j = 1; j <= 4; j++){
+						if(document.getElementById("q" + i + "o" + j).value != "" && document.getElementById("q" + i + "o" + j).value !=
+						null){
+							localStorage.setItem("q" + i + "o" + j, document.getElementById("q" + i + "o" + j).value);
+						} else{
+							localStorage.setItem("q" + i, j-1);
+							break;
+						}
+					}
+
+				}
+			}
+			localStorage.setItem("number", number);
+		}
+	</script>
+</html>

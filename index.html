@@ -168,6 +168,7 @@
 				if (document.getElementById("question" + i).value != "" && document.getElementById("question" + i).value !=
 					null) {
 					number++;
+					let flag = 0;
 					localStorage.setItem("question" + number, document.getElementById("question" + i).value);
 					for(let j = 1; j <= 4; j++){
 						if(document.getElementById("q" + i + "o" + j).value != "" && document.getElementById("q" + i + "o" + j).value !=
@@ -175,8 +176,12 @@
 							localStorage.setItem("q" + i + "o" + j, document.getElementById("q" + i + "o" + j).value);
 						} else{
 							localStorage.setItem("q" + i, j-1);
+							flag = 1;
 							break;
 						}
+					}
+					if(flag == 0){
+						sessionStorage.setItem("q" + i, 4);
 					}
 
 				}
